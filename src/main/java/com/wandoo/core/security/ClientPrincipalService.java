@@ -22,11 +22,11 @@ public class ClientPrincipalService implements UserDetailsService {
     public ClientPrincipal loadUserByUsername(String username) throws UsernameNotFoundException {
         return clientRepository.findByUsername(username)
                 .map(ClientPrincipal::fromClient)
-                .orElseThrow(userNotFound(username));
+                .orElseThrow(clientNotFound(username));
     }
 
-    private static Supplier<UsernameNotFoundException> userNotFound(String username) {
-        return () -> new UsernameNotFoundException(format("User '%s' not found", username));
+    private static Supplier<UsernameNotFoundException> clientNotFound(String username) {
+        return () -> new UsernameNotFoundException(format("Client '%s' was not found", username));
     }
 
 }

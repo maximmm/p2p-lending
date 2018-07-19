@@ -4,6 +4,7 @@ import com.wandoo.client.ClientBean
 import com.wandoo.core.configuration.BaseControllerSpec
 import spock.lang.Unroll
 
+import static org.apache.commons.lang3.StringUtils.EMPTY
 import static org.springframework.http.HttpStatus.BAD_REQUEST
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.MediaType.APPLICATION_JSON
@@ -65,7 +66,7 @@ class ClientRegistrationControllerSpec extends BaseControllerSpec {
         where:
         username    | codes
         "123"       | ["Size"]
-        ""          | ["Size", "NotBlank"]
+        EMPTY       | ["Size", "NotBlank"]
     }
 
     @Unroll
@@ -91,13 +92,13 @@ class ClientRegistrationControllerSpec extends BaseControllerSpec {
         where:
         personalId  | codes
         "123"       | ["Size"]
-        ""          | ["Size", "NotBlank"]
+        EMPTY       | ["Size", "NotBlank"]
     }
 
     @Unroll
     def "Should fail when password field '#property' is empty"() {
         given:
-        request."${property}" = ""
+        request."${property}" = EMPTY
 
         when:
         def result = mockMvc.perform(post('/registration')

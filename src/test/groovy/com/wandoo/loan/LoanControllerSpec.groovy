@@ -8,6 +8,7 @@ import spock.lang.Unroll
 
 import static com.wandoo.loan.Loan.Status.OPEN
 import static java.math.BigDecimal.valueOf
+import static org.apache.commons.lang3.StringUtils.EMPTY
 import static org.springframework.http.HttpStatus.BAD_REQUEST
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.MediaType.APPLICATION_JSON
@@ -98,7 +99,7 @@ class LoanControllerSpec extends BaseControllerSpec {
         where:
         loanNumber  | codes
         "123"       | ["Size"]
-        ""          | ["Size", "NotBlank"]
+        EMPTY       | ["Size", "NotBlank"]
     }
 
     @Unroll

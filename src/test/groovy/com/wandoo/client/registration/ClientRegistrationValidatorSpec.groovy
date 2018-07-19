@@ -5,6 +5,8 @@ import com.wandoo.core.validation.ValidationException
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import static org.apache.commons.lang3.StringUtils.EMPTY
+
 class ClientRegistrationValidatorSpec extends Specification {
 
     private static final String USERNAME = "username"
@@ -49,7 +51,7 @@ class ClientRegistrationValidatorSpec extends Specification {
         where:
         username                    | errorsCount | errorMessages
         null                        | 2           | ["Should not be blank.", "Should be between 5 and 20 chars long."]
-        ""                          | 2           | ["Should not be blank.", "Should be between 5 and 20 chars long."]
+        EMPTY                       | 2           | ["Should not be blank.", "Should be between 5 and 20 chars long."]
         "       "                   | 2           | ["Should not be blank.", "Should be between 5 and 20 chars long."]
         "123"                       | 1           | ["Should be between 5 and 20 chars long."]
         "MORE_THAN_20_CHARACTERS"   | 1           | ["Should be between 5 and 20 chars long."]
@@ -76,8 +78,7 @@ class ClientRegistrationValidatorSpec extends Specification {
         where:
         personalId      | errorsCount | errorMessages
         null            | 2           | ["Should not be blank.", "Should be 10 chars long."]
-        ""              | 2           | ["Should not be blank.", "Should be 10 chars long."]
-        "       "       | 2           | ["Should not be blank.", "Should be 10 chars long."]
+        EMPTY           | 2           | ["Should not be blank.", "Should be 10 chars long."]
         "           "   | 2           | ["Should not be blank.", "Should be 10 chars long."]
         "123"           | 1           | ["Should be 10 chars long."]
         "123456789 "    | 1           | ["Should be 10 chars long."]
@@ -104,7 +105,7 @@ class ClientRegistrationValidatorSpec extends Specification {
         where:
         password    | passwordRepeated  | errorsCount   | errorMessages
         null        | null              | 2             | ["Should not be blank.", "Should be between 6 and 30 chars long."]
-        ""          | "        "        | 2             | ["Should not be blank.", "Should be between 6 and 30 chars long."]
+        EMPTY       | "        "        | 2             | ["Should not be blank.", "Should be between 6 and 30 chars long."]
         "password"  | "password1"       | 1             | ["Should match with 'passwordRepeated' field."]
     }
 
@@ -124,11 +125,9 @@ class ClientRegistrationValidatorSpec extends Specification {
     }
 
     void verify(def validationResult, def field, def errorsCount, def errorMessages) {
-        with (validationResult.getErrors()) {
-            with(get(field)) {
-                assert size() == errorsCount
-                assert it == errorMessages as Set
-            }
+        with (validationResult.getErrors().get(field)) {
+            assert size() == errorsCount
+            assert it == errorMessages as Set
         }
     }
 
