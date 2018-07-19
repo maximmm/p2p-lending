@@ -1,0 +1,22 @@
+spring:
+  h2.console:
+    enabled: true
+    path: /h2
+
+  datasource:
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate.ddl-auto: validate
+
+  liquibase.change-log: classpath:/db/changelog/db.changelog-master.xml
+
+  jackson.date-format: dd-MM-yyyy
+
+security.originators:
+  ip-addresses:
+    LOCAL_ORIGINATOR: 0:0:0:0:0:0:0:1
+    RANDOM_ORIGINATOR: e066:f193:fc42:422d:ddb8:f0ac:c62d:76f1

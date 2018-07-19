@@ -1,0 +1,144 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="maksims.venediktovs">
+
+        <createTable tableName="CLIENTS" schemaName="public">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="PERSONAL_ID" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_CREATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_UPDATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="clients_seq" schemaName="public"/>
+
+    </changeSet>
+
+    <changeSet id="2" author="maksims.venediktovs">
+
+        <createTable tableName="LOANS" schemaName="public">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOAN_NUMBER" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="ORIGINATOR" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DUE_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AVAILABLE_FOR_INVESTMENT" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_CREATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_UPDATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="loans_seq" schemaName="public"/>
+
+    </changeSet>
+
+    <changeSet id="3" author="maksims.venediktovs">
+
+        <createTable tableName="LOAN_ACCOUNT_ENTRIES" schemaName="public">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOAN_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_lae_loan" references="LOANS(id)"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AMOUNT" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_CREATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_UPDATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="loan_account_entries_seq" schemaName="public"/>
+
+    </changeSet>
+
+    <changeSet id="4" author="maksims.venediktovs">
+
+        <createTable tableName="INVESTMENTS" schemaName="public">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOAN_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_investment_loan" references="LOANS(id)"/>
+            </column>
+            <column name="CLIENT_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_investment_client" references="CLIENTS(id)"/>
+            </column>
+            <column name="INVESTMENT_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RETURN_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INVESTMENT_AMOUNT" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RETURN_AMOUNT" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_CREATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_UPDATED" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_VERSION" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="investments_seq" schemaName="public"/>
+
+    </changeSet>
+
+</databaseChangeLog>
