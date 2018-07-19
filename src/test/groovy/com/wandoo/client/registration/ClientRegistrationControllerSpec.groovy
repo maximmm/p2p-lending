@@ -1,7 +1,7 @@
 package com.wandoo.client.registration
 
 import com.wandoo.client.ClientBean
-import com.wandoo.configuration.BaseControllerSpec
+import com.wandoo.core.configuration.BaseControllerSpec
 import spock.lang.Unroll
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST

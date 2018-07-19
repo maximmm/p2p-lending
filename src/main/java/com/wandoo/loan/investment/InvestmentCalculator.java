@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.Period;
 import java.util.Date;
 
+import static com.wandoo.core.util.DateTimeUtil.toDate;
 import static com.wandoo.core.util.DateTimeUtil.toLocalDate;
 import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_UP;
@@ -27,7 +28,7 @@ public class InvestmentCalculator {
     private Investment createInvestment(BigDecimal investmentAmount, BigDecimal returnAmount, Date loanDueDate) {
         Investment investment = new Investment();
         investment.setInvestmentAmount(investmentAmount);
-        investment.setInvestmentDate(new Date());
+        investment.setInvestmentDate(toDate(now()));
         investment.setReturnDate(loanDueDate);
         investment.setReturnAmount(returnAmount);
         return investment;

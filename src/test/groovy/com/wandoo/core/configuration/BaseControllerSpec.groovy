@@ -1,4 +1,4 @@
-package com.wandoo.configuration
+package com.wandoo.core.configuration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.wandoo.client.Client
@@ -19,8 +19,9 @@ abstract class BaseControllerSpec extends Specification {
 
     protected static final String LOAN_NUMBER = "1234567890"
     protected static final String ORIGINATOR = "Originator"
-    protected static final BigDecimal AMOUNT = valueOf(1_000L)
-    protected static final BigDecimal PAYMENT_AMOUNT = valueOf(300L)
+    protected static final BigDecimal MAIN_AMOUNT = valueOf(1_000L)
+    protected static final BigDecimal PAYMENT_AMOUNT = valueOf(400L)
+    protected static final BigDecimal INVESTMENT_AMOUNT = valueOf(150L)
     protected static final Date START_DATE = toDate(now().minusMonths(1))
     protected static final Date DUE_DATE = toDate(now().plusMonths(11))
 
@@ -35,11 +36,15 @@ abstract class BaseControllerSpec extends Specification {
     }
 
     def loanStub() {
-        dummyLoan(AMOUNT, AMOUNT, AMOUNT)
+        dummyLoan(MAIN_AMOUNT, MAIN_AMOUNT, MAIN_AMOUNT)
     }
 
     def loanWithPaymentStub() {
-        dummyLoan(AMOUNT, AMOUNT.subtract(PAYMENT_AMOUNT), AMOUNT)
+        dummyLoan(MAIN_AMOUNT, MAIN_AMOUNT.subtract(PAYMENT_AMOUNT), MAIN_AMOUNT)
+    }
+
+    def loanWithInvestmentStub() {
+        dummyLoan(MAIN_AMOUNT, MAIN_AMOUNT, MAIN_AMOUNT.subtract(INVESTMENT_AMOUNT))
     }
 
     def dummyLoan(def mainAmount, def amountToBePaid, def amountToBeInvested) {

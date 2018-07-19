@@ -43,7 +43,7 @@ class OriginatorServiceSpec extends Specification {
         noExceptionThrown()
     }
 
-    def "Should throw exception during loan receiving if such already exists"() {
+    def "Should throw IllegalStateException during loan receiving if such already exists"() {
         when:
         service.receiveLoan(prepareLoanRequest())
 
@@ -79,7 +79,7 @@ class OriginatorServiceSpec extends Specification {
         noExceptionThrown()
     }
 
-    def "Should throw exception during payment receiving if corresponding loan does not exist"() {
+    def "Should throw IllegalStateException during payment receiving if corresponding loan does not exist"() {
         when:
         service.pay(preparePaymentRequest())
 
@@ -119,21 +119,19 @@ class OriginatorServiceSpec extends Specification {
     }
 
     def prepareLoanRequest() {
-        new OriginatorLoanRequest().with {
-            loanNumber = LOAN_NUMBER
-            originator = ORIGINATOR
-            amount = AMOUNT
-            startDate = START_DATE
-            dueDate = DUE_DATE
-            it
+        Stub(OriginatorLoanRequest) {
+            getLoanNumber() >> LOAN_NUMBER
+            getOriginator() >> ORIGINATOR
+            getAmount() >> AMOUNT
+            getStartDate() >> START_DATE
+            getDueDate() >> DUE_DATE
         }
     }
 
     def preparePaymentRequest() {
-        new OriginatorPaymentRequest().with {
-            loanNumber = LOAN_NUMBER
-            paymentAmount = PAYMENT_AMOUNT
-            it
+        Stub(OriginatorPaymentRequest) {
+            getLoanNumber() >> LOAN_NUMBER
+            getPaymentAmount() >> PAYMENT_AMOUNT
         }
     }
 

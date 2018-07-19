@@ -1,6 +1,6 @@
 package com.wandoo.originator
 
-import com.wandoo.configuration.BaseControllerSpec
+import com.wandoo.core.configuration.BaseControllerSpec
 import com.wandoo.loan.LoanBean
 import spock.lang.Unroll
 
@@ -46,9 +46,9 @@ class OriginatorControllerSpec extends BaseControllerSpec {
                 startDate == START_DATE
                 dueDate == DUE_DATE
                 status == OPEN.name()
-                mainAmount == AMOUNT
-                amountToBePaid == AMOUNT
-                amountToBeInvested == AMOUNT
+                mainAmount == MAIN_AMOUNT
+                amountToBePaid == MAIN_AMOUNT
+                amountToBeInvested == MAIN_AMOUNT
                 availableForInvestment == true
             }
             getStatus() == OK.value()
@@ -204,9 +204,9 @@ class OriginatorControllerSpec extends BaseControllerSpec {
                 startDate == START_DATE
                 dueDate == DUE_DATE
                 status == OPEN.name()
-                mainAmount == AMOUNT
-                amountToBePaid == AMOUNT.subtract(PAYMENT_AMOUNT)
-                amountToBeInvested == AMOUNT
+                mainAmount == MAIN_AMOUNT
+                amountToBePaid == MAIN_AMOUNT.subtract(PAYMENT_AMOUNT)
+                amountToBeInvested == MAIN_AMOUNT
                 availableForInvestment == true
             }
             getStatus() == OK.value()
@@ -269,7 +269,7 @@ class OriginatorControllerSpec extends BaseControllerSpec {
         new OriginatorLoanRequest().with {
             loanNumber = LOAN_NUMBER
             originator = ORIGINATOR
-            amount = AMOUNT
+            amount = MAIN_AMOUNT
             startDate = START_DATE
             dueDate = DUE_DATE
             it

@@ -110,11 +110,7 @@ public class Loan extends BaseEntity {
         return getMainAmount().subtract(getInvestmentAmount());
     }
 
-    private boolean isOpen() {
-        return status == OPEN;
-    }
-
-    private boolean isPaid() {
+    public boolean isPaid() {
         return status == PAID;
     }
 

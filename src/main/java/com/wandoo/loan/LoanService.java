@@ -1,5 +1,6 @@
 package com.wandoo.loan;
 
+import com.wandoo.client.Client;
 import com.wandoo.client.ClientId;
 import com.wandoo.client.ClientRepository;
 import com.wandoo.loan.investment.Investment;
@@ -32,17 +33,21 @@ public class LoanService {
     public Loan investInLoan(InvestmentRequest request, ClientId clientId) {
         Loan loan = loanRepository.findByLoanNumber(request.getLoanNumber())
                 .orElseThrow(loanNotFound(request.getLoanNumber()));
+        Client client = clientRepository.findById(clientId.getId()).orElseThrow(clientNotFound(clientId.getId()));
 
         Investment investment = investmentCalculator.calculate(request.getInvestmentAmount(), loan.getDueDate());
         loan.makeInvestment(investment);
-
-        clientRepository.findById(clientId.getId()).ifPresent(client -> client.addInvestment(investment));
+        client.addInvestment(investment);
 
         return loan;
     }
 
     private static Supplier<IllegalStateException> loanNotFound(String loanNumber) {
         return () -> new IllegalStateException(format("Loan '%s' was not found.", loanNumber));
+    }
+
+    private static Supplier<IllegalStateException> clientNotFound(Long clientId) {
+        return () -> new IllegalStateException(format("Client with id '%s' was not found.", clientId));
     }
 
 }

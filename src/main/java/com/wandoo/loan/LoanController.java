@@ -22,7 +22,7 @@ public class LoanController {
     @GetMapping(path = "/investment/all", params = { "page", "size" })
     public ResponseEntity<?> listAvailableLoansForInvestment(@RequestParam("page") int page,
                                                              @RequestParam("size") int size) {
-        return ok(loanService.getAvailableForInvestment(page, size).map(LoanBean::from));
+        return ok(loanService.getAvailableForInvestment(page, size).map(LoanBean::from).getContent());
     }
 
     @PostMapping("/investment")

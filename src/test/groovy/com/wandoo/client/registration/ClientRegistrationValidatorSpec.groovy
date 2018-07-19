@@ -33,19 +33,17 @@ class ClientRegistrationValidatorSpec extends Specification {
 
     @Unroll
     def "Should have '#errorMessages' error messages for username '#username'"() {
-        given:
-        request.username = username
-
         when:
         validator.validate(request)
 
         then:
+        request.getUsername() >> username
+
+        and:
         0 * repository.existsByUsernameOrPersonalId(_ as String, _ as String)
 
         and:
         def exception = thrown(ValidationException)
-
-        and:
         verify(exception.getValidationResult(), "username", errorsCount, errorMessages)
 
         where:
@@ -59,13 +57,13 @@ class ClientRegistrationValidatorSpec extends Specification {
 
     @Unroll
     def "Should have '#errorMessages' error messages for personalId '#personalId'"() {
-        given:
-        request.personalId = personalId
-
         when:
         validator.validate(request)
 
         then:
+        request.getPersonalId() >> personalId
+
+        and:
         0 * repository.existsByUsernameOrPersonalId(_ as String, _ as String)
 
         and:
@@ -87,15 +85,15 @@ class ClientRegistrationValidatorSpec extends Specification {
 
     @Unroll
     def "Should have '#errorMessages' error messages for password '#password' and passwordRepeated '#passwordRepeated'"() {
-        given:
-        request.password = password
-        request.passwordRepeated = passwordRepeated
-
         when:
         validator.validate(request)
 
         then:
         0 * repository.existsByUsernameOrPersonalId(_ as String, _ as String)
+
+        and:
+        request.getPassword() >> password
+        request.getPasswordRepeated() >> passwordRepeated
 
         and:
         def exception = thrown(ValidationException)
@@ -111,7 +109,7 @@ class ClientRegistrationValidatorSpec extends Specification {
     }
 
     @Unroll
-    def "Should throw exception when client exists by username or personalId"() {
+    def "Should throw ValidationException when client exists by username or personalId"() {
         when:
         validator.validate(request)
 
@@ -135,12 +133,11 @@ class ClientRegistrationValidatorSpec extends Specification {
     }
 
     def prepareRegistrationRequest() {
-        new ClientRegistrationRequest().with {
-            username = USERNAME
-            personalId = PERSONAL_ID
-            password = PASSWORD
-            passwordRepeated = PASSWORD
-            it
+        Stub(ClientRegistrationRequest) {
+            getUsername() >> USERNAME
+            getPersonalId() >> PERSONAL_ID
+            getPassword() >> PASSWORD
+            getPasswordRepeated() >> PASSWORD
         }
     }
 

@@ -57,7 +57,7 @@ class ClientRegistrationServiceSpec extends Specification {
         }
     }
 
-    def "Should throw validation exception"() {
+    def "Should throw ValidationException"() {
         when:
         service.register(request)
 
@@ -80,12 +80,11 @@ class ClientRegistrationServiceSpec extends Specification {
     }
 
     def prepareRequest() {
-        new ClientRegistrationRequest().with {
-            username = USERNAME
-            personalId = PERSONAL_ID
-            password = PASSWORD
-            passwordRepeated = PASSWORD
-            it
+        Stub(ClientRegistrationRequest) {
+            getUsername() >> USERNAME
+            getPersonalId() >> PERSONAL_ID
+            getPassword() >> PASSWORD
+            getPasswordRepeated() >> PASSWORD
         }
     }
 
