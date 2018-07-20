@@ -5,17 +5,17 @@ import lombok.RequiredArgsConstructor;
 import java.util.function.Predicate;
 
 @RequiredArgsConstructor
-public class BasicValidation<K> implements Validation<K> {
+public class BasicValidation<T> implements Validation<T> {
 
-    private final Predicate<K> predicate;
+    private final Predicate<T> predicate;
     private final String errorMessage;
 
-    static <K> BasicValidation<K> from(Predicate<K> predicate, String onErrorMessage) {
-        return new BasicValidation<K>(predicate, onErrorMessage);
+    static <T> BasicValidation<T> from(Predicate<T> predicate, String onErrorMessage) {
+        return new BasicValidation<T>(predicate, onErrorMessage);
     }
 
     @Override
-    public void validate(K param, String field, ValidationResult validationResult) {
+    public void validate(T param, String field, ValidationResult validationResult) {
         if (!predicate.test(param))
             validationResult.addError(field, errorMessage);
     }

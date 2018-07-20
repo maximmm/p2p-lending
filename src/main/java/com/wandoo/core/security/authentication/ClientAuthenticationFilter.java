@@ -22,7 +22,9 @@ public class ClientAuthenticationFilter extends GenericFilterBean {
             throws IOException, ServletException {
 
         getContext().setAuthentication(
-                authenticationService.getAuthentication((HttpServletRequest) request).orElse(null));
+                authenticationService.getAuthentication((HttpServletRequest) request)
+                        .orElse(null)
+        );
 
         filterChain.doFilter(request, response);
     }

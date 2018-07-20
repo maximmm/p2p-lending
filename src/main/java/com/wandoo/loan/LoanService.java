@@ -33,7 +33,9 @@ public class LoanService {
     public Loan investInLoan(InvestmentRequest request, ClientId clientId) {
         Loan loan = loanRepository.findByLoanNumber(request.getLoanNumber())
                 .orElseThrow(loanNotFound(request.getLoanNumber()));
-        Client client = clientRepository.findById(clientId.getId()).orElseThrow(clientNotFound(clientId.getId()));
+
+        Client client = clientRepository.findById(clientId.getId())
+                .orElseThrow(clientNotFound(clientId.getId()));
 
         Investment investment = investmentCalculator.calculate(request.getInvestmentAmount(), loan.getDueDate());
         loan.makeInvestment(investment);

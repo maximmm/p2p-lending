@@ -49,21 +49,21 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(clientPrincipalService).passwordEncoder(bCryptPasswordEncoder());
     }
 
-    public String getAllowedOriginatorsIpAddresses() {
+    private String getAllowedOriginatorsIpAddresses() {
         return originatorsIpAddresses().values().stream()
                 .map(ip -> format("hasIpAddress('%s')", ip))
                 .collect(joining(" or "));
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean

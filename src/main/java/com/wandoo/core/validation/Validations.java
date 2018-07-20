@@ -9,7 +9,7 @@ import static org.apache.commons.lang3.StringUtils.trimToEmpty;
 
 public final class Validations {
 
-    public static Validation<String> notBlank = from(StringUtils::isNotBlank, "Should not be blank.");
+    private static Validation<String> notBlank = from(StringUtils::isNotBlank, "Should not be blank.");
 
     public static Validation<String> lengthIn(int minLength, int maxLength) {
         return notBlank.and(from((str) -> between(minLength, maxLength).contains(trimToEmpty(str).length()),
