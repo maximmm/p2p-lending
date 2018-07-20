@@ -15,7 +15,7 @@ Valid request example:
 	"personalId" : "1234567894"
 }
 ```
-After successful registration, the AUTHORIZATION header with Bearer token will be send back with response.
+After successful registration, the 'Authorization' header with Bearer token will be send back with response.
 
 2. Client login
 
@@ -28,7 +28,7 @@ Valid request example:
 	"password" : "password"
 }
 ```
-After successful login, the AUTHORIZATION header with Bearer token will be send back with response. 
+After successful login, the 'Authorization' header with Bearer token will be send back with response. 
 
 3. Receive a loan from loan issuing company (originator)
 
@@ -72,13 +72,13 @@ Valid request example:
 	"investmentAmount" : "400.00"
 }
 ```
-Please note, that in order to execute requests to http://localhost:8080/loan/** endpoints you should provide Bearer token in AUTHORIZATION header. The one you have received after registration/login procedure.
+Please note, that in order to execute requests to http://localhost:8080/loan/** endpoints you should provide Bearer token in 'Authorization' header. The one you have received after registration/login procedure.
 
 6. Expose available loans for the investment
 
 GET http://localhost:8080/loan/investment/all?page=0&size=10
 
-Please note, that in order to execute requests to http://localhost:8080/loan/** endpoints you should provide Bearer token in AUTHORIZATION header. The one you have received after registration/login procedure.
+Please note, that in order to execute requests to http://localhost:8080/loan/** endpoints you should provide Bearer token in 'Authorization' header. The one you have received after registration/login procedure.
 
 ## H2 Console (embedded db):
 
