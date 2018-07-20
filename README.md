@@ -6,7 +6,7 @@
 
 POST http://localhost:8080/registration
 
-Example request:
+Valid request example:
 ```
 {
 	"username" : "dummyClient",
@@ -21,7 +21,7 @@ After successful registration, the AUTHORIZATION header with Bearer token will b
 
 POST http://localhost:8080/login
 
-Example request:
+Valid request example:
 ```
 {
 	"username" : "dummyClient",
@@ -34,7 +34,7 @@ After successful login, the AUTHORIZATION header with Bearer token will be send 
 
 POST http://localhost:8080/originator/loan
 
-Example request:
+Valid request example:
 ```
 {
 	"loanNumber" : "1234559",
@@ -50,7 +50,7 @@ Please note, that in order to execute requests to http://localhost:8080/originat
 
 POST http://localhost:8080/originator/payment
 
-Example request:
+Valid request example:
 ```
 {
 	"loanNumber" : "1234559",
@@ -64,7 +64,7 @@ Please note, that in order to execute requests to http://localhost:8080/originat
 
 POST http://localhost:8080/loan/investment
 
-Example request:
+Valid request example:
 ```
 {
 	"loanNumber" : "1234558",
