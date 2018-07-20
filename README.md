@@ -83,3 +83,7 @@ Please note, that in order to execute requests to http://localhost:8080/loan/** 
 ## H2 Console:
 
 http://localhost:8080/h2/
+
+Username: sa
+
+Password: 
