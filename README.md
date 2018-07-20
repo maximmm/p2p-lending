@@ -3,7 +3,9 @@
 #### Microservice consists of six endpoints:
 
 1. Client registration
+
 POST http://localhost:8080/registration
+
 Example request:
 ```
 {
@@ -16,7 +18,9 @@ Example request:
 After successful registration, the AUTHORIZATION header with Bearer token will be send back with response.
 
 2. Client login
+
 POST http://localhost:8080/login
+
 Example request:
 ```
 {
@@ -27,7 +31,9 @@ Example request:
 After successful login, the AUTHORIZATION header with Bearer token will be send back with response. 
 
 3. Receive a loan from loan issuing company (originator)
+
 POST http://localhost:8080/originator/loan
+
 Example request:
 ```
 {
@@ -41,7 +47,9 @@ Example request:
 Please note, that in order to execute requests to http://localhost:8080/originator/** endpoints, your IP should be in application.properties in 'security.originators.ip-addresses' list. By default localhost as IPv6 is there.
 
 4. Receive a payment from loan issuing company (originator)
+
 POST http://localhost:8080/originator/payment
+
 Example request:
 ```
 {
@@ -53,7 +61,9 @@ Example request:
 Please note, that in order to execute requests to http://localhost:8080/originator/** endpoints, your IP should be in application.properties in 'security.originators.ip-addresses' list. By default localhost as IPv6 is there.
 
 5. Client invest in loan
+
 POST http://localhost:8080/loan/investment
+
 Example request:
 ```
 {
@@ -65,6 +75,7 @@ Example request:
 Please note, that in order to execute requests to http://localhost:8080/loan/** endpoints you should provide Bearer token in AUTHORIZATION header. The one you have received after registration/login procedure.
 
 6. Expose available loans for the investment
+
 GET http://localhost:8080/loan/investment/all?page=0&size=10
 
 Please note, that in order to execute requests to http://localhost:8080/loan/** endpoints you should provide Bearer token in AUTHORIZATION header. The one you have received after registration/login procedure.
