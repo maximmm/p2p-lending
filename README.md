@@ -80,3 +80,6 @@ GET http://localhost:8080/loan/investment/all?page=0&size=10
 
 Please note, that in order to execute requests to http://localhost:8080/loan/** endpoints you should provide Bearer token in AUTHORIZATION header. The one you have received after registration/login procedure.
 
+## H2 Console:
+
+http://localhost:8080/h2/
