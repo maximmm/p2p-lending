@@ -38,10 +38,10 @@ Valid request example:
 ```
 {
 	"loanNumber" : "1234559",
-	"startDate" : "15-07-2017",
-	"dueDate" : "17-04-2019",
+	"originator" : "DummyOne",
 	"amount" : "1400.00",
-	"originator" : "DummyOne"
+	"startDate" : "15-07-2017",
+	"dueDate" : "17-04-2019"
 }
 ```
 Please note, that in order to execute requests to http://localhost:8080/originator/** endpoints, your IP should be in application.properties in 'security.originators.ip-addresses' list. By default localhost as IPv6 is there.
@@ -54,8 +54,8 @@ Valid request example:
 ```
 {
 	"loanNumber" : "1234559",
-	"paymentAmount" : "200.00",
-	"originator" : "DummyOne"
+	"originator" : "DummyOne",
+	"paymentAmount" : "200.00"
 }
 ```
 Please note, that in order to execute requests to http://localhost:8080/originator/** endpoints, your IP should be in application.properties in 'security.originators.ip-addresses' list. By default localhost as IPv6 is there.
